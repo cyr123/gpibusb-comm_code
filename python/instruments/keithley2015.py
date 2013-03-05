@@ -292,7 +292,15 @@ class Keithley2015(Instrument):
         '''
         self.write('ABOR')
         
+    # Read data in trace buffer    
+    def readData(self):
+        '''
+        When this command is sent and the Model 2015 is addressed to talk, all the
+        readings stored in the buffer are sent to the computer.
         
+        Returns a list of floats.
+        '''        
+        return map( float, self.query('DATA:DATA?').split(',') )        
         
         
         
